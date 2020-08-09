@@ -4,81 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视差滚动</title>
-    <link rel="stylesheet" href="rolling.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <main class="main">
-        <section class="list-item">
-            <div class="item-image">
-                <img src="img3.jpg" alt="">
-            </div>
-            <div class="item-text">
-                <div class="text-title"><a href="https://www.bilibili.com/bangumi/play/ep63669">『言叶之庭』</a></div>
-                <div class="text-desc"><a href="https://www.bilibili.com/bangumi/play/ep63669">在我看来，她仿佛代言了这整个世界的秘密</a>
+    <div class="container">
+        <img src="Ai.jpg" alt="">
+        <div class="panel">
+            <div class="content login">
+                <div class="switch">
+                    <span id="login" class="active">Login</span><span>/</span><span id="signup">Sign Up</span>
+                    <form action="">
+                        <div class="input" id="email" placeholder="Email"><input type="text"><span
+                                class="neirong">Email</span></div>
+                        <div class="input" placeholder="Username"><input type="text"><span
+                                class="neirong">Username</span></div>
+                        <div class="input" placeholder="Password"><input type="text"><span
+                                class="neirong">Password</span></div>
+                        <div class="input" id="repeat" placeholder="Repeat"><input type="text"><span
+                                class="neirong">Repeat</span></div>
+                        <span id="bendan">Forget?</span>
+                        <button><a href="https://www.bilibili.com/">LOGIN</a></button>
+                    </form>
                 </div>
             </div>
-        </section>
-        <section class="list-item">
-            <div class="item-image">
-                <img src="img1.jpg" alt="">
-            </div>
-            <div class="item-text">
-                <div class="text-title"><a href="https://www.bilibili.com/bangumi/play/ep88569">『玉子爱情故事』</a></div>
-                <div class="text-desc"><a href="https://www.bilibili.com/bangumi/play/ep88569">青春总是焦急的
-                        连一勺砂糖溶于杯中的时间都等不及</a> </div>
-            </div>
-        </section>
-        <section class="list-item">
-            <div class="item-image">
-                <img src="img2.jpg" alt="">
-            </div>
-            <div class="item-text">
-                <div class="text-title"><a href="https://www.bilibili.com/bangumi/media/md28223816">『俺物语』</a>
-                </div>
-                <div class="text-desc"><a
-                        href="https://www.bilibili.com/bangumi/media/md28223816">哪怕已经不在校园。看着这样美好的少年，都会为他笑出声音</a>
-                </div>
-            </div>
-        </section>
-        <section class="list-item">
-            <div class="item-image">
-                <img src="img4.jpg" alt="">
-            </div>
-            <div class="item-text">
-                <div class="text-title"><a
-                        href="https://www.bilibili.com/bangumi/play/ss28006/?from=search&seid=706750791795866229">『擅长捉弄人的高木同学』</a>
-                </div>
-                <div class="text-desc"><a
-                        href="https://www.bilibili.com/bangumi/play/ss28006/?from=search&seid=706750791795866229">两个人独处就是青春啊</a>
-                </div>
-            </div>
-        </section>
-        <section class="list-item">
-            <div class="item-image">
-                <img src="img5.jpg" alt="">
-            </div>
-            <div class="item-text">
-                <div class="text-title"><a href="https://www.bilibili.com/bangumi/play/ep247538">『会长是女仆大人』</a></div>
-                <div class="text-desc"><a href="https://www.bilibili.com/bangumi/play/ep247538">如果我赢了，请你称赞那边的会长是蝴蝶好吗</a>
-                </div>
-            </div>
-        </section>
-        <section class="list-item">
-            <div class="item-image">
-                <img src="img6.jpg" alt="">
-            </div>
-            <div class="item-text">
-                <div class="text-title"><a
-                        href="https://www.bilibili.com/bangumi/play/ss687/?from=search&seid=232310102196889352">『樱花庄的宠物女孩』</a>
-                </div>
-                <div class="text-desc"><a
-                        href="https://www.bilibili.com/bangumi/play/ss687/?from=search&seid=232310102196889352">看到比自己更沮丧的家伙就觉得安心，这实在是很不成熟。我现在已经在反省了</a>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </div>
 </body>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $('#login').click(function () {  //1. 颜色转变
+        $('.switch span').removeClass('active');  //排他
+        $(this).addClass('active');
+        $(this).parents('.content').removeClass('signup');  //2。点击改变input
+        $(this).parents('.content').addClass('login');
+    })
+    $('#signup').click(function () {
+        $('.switch span').removeClass('active');
+        $(this).addClass('active');
+        $(this).parents('.content').removeClass('login');
+        $(this).parents('.content').addClass('signup');
+    })
+    $('.input input').focus(function () {
+        $(this).siblings('span').addClass('focus');
+    })
+    $('.input input').blur(function () {
+        if ($(this).val() === '')
+            $(this).siblings('span').removeClass('focus');
+    })
+    $('.input span').click(function () {
+        $(this).siblings('input').focus();
+    })
+    $('#bendan').click(function () {
+        alert('笨蛋！');
+    })
+    // $('.input').click(function () {
+    //     $(this).addClass('focus');
+    // })
+    // $(document).click(function (e) {
+    //     if (e.target.tagName != "DIV" && e.target.tagName != "INPUT") {
+    //         console.log($('.input input').eq(1));
+    //         if ($('.input input').val() === '')
+    //             $('.input').removeClass('focus');
+    //     }
+    // })
+</script>
 
 </html>
