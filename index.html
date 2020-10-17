@@ -1,93 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据可视化</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- 头部的盒子 -->
+    <header>
+      <h1>数据可视化-ECharts</h1>
+      <div class="showTime"></div>
+      <script>
+        var t = null;
+        t = setTimeout(time, 1000); //開始运行
+        function time() {
+          clearTimeout(t); //清除定时器
+          dt = new Date();
+          var y = dt.getFullYear();
+          var mt = dt.getMonth() + 1;
+          var day = dt.getDate();
+          var h = dt.getHours(); //获取时
+          var m = dt.getMinutes(); //获取分
+          var s = dt.getSeconds(); //获取秒
+          document.querySelector(".showTime").innerHTML =
+            "当前时间：" +
+            y +
+            "年" +
+            mt +
+            "月" +
+            day +
+            "-" +
+            h +
+            "时" +
+            m +
+            "分" +
+            s +
+            "秒";
+          t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+      </script>
+      &
+    </header>
 
-<head>
-  <meta charset="UTF-8">
-  <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-
-  <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">clap</span>
-    </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
-      <span class="sound">hihat</span>
-    </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
-      <span class="sound">kick</span>
-    </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
-      <span class="sound">openhat</span>
-    </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
-      <span class="sound">boom</span>
-    </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
-      <span class="sound">ride</span>
-    </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
-      <span class="sound">snare</span>
-    </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
-      <span class="sound">tom</span>
-    </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
-      <span class="sound">tink</span>
-    </div>
-  </div>
-
-  <audio data-key="65" src="sounds/clap.wav"></audio>
-  <audio data-key="83" src="sounds/hihat.wav"></audio>
-  <audio data-key="68" src="sounds/kick.wav"></audio>
-  <audio data-key="70" src="sounds/openhat.wav"></audio>
-  <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
-  <audio data-key="74" src="sounds/snare.wav"></audio>
-  <audio data-key="75" src="sounds/tom.wav"></audio>
-  <audio data-key="76" src="sounds/tink.wav"></audio>
-  <audio data-op="true" autoplay="autoplay" src="op.mp3"></audio>
-  <script>
-    // const op = document.querySelector(`audio[data-op="true"]`);
-    function op() {
-      var music = document.querySelector(`audio[data-op="true"]`);
-      if (music.paused) {
-        music.paused = false;
-        music.play();
-      }
-    }
-    //调用函数
-    window.addEventListener('keydown', op);
-    function playSound(e) {
-      // console.log(e);
-      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); //关键使keycode 和属性选择器
-      const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-      if (!audio) return;
-      key.classList.add('playing');
-      audio.play();  //触发音频  问题是总会等待上一个结束
-      audio.currentTime = 0;  // 进度归零，多音频并行 ， 写在play前后都没差，不会中断音频
-    }
-    function remove(e) {
-      if (e.propertyName !== 'transform') return;// 过滤其中一种事件
-      e.target.classList.remove('playing');    // e.target 能返回触发事件的对象！！！
-    }
-    const keys = Array.from(document.querySelectorAll('.key'));   //qs获取dom必须要写 . #什么的！！！
-    keys.forEach((key) => key.addEventListener('transitionend', remove));
-    window.addEventListener('keydown', playSound);
-  </script>
-
-</body>
-
+    <!-- 页面主体部分 -->
+    <section class="mainbox">
+      <div class="column">
+        <div class="panel bar">
+          <h2>柱形图-就业行业</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line">
+          <h2>
+            折线图-人员变化 <a href="javacript:;">2020</a
+            ><a href="javascript:;">2021</a>
+          </h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie">
+          <h2>饼形图-年龄分布</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+      <div class="column">
+        <!-- no模块制作 -->
+        <div class="no">
+          <div class="no-hd">
+            <ul>
+              <li>125811</li>
+              <li>100000</li>
+            </ul>
+          </div>
+          <div class="no-bd">
+            <ul>
+              <li>前端需求人数</li>
+              <li>市场供应人数</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 地图模块 -->
+        <div class="map">
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+          <div class="chart"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="panel bar2">
+          <h2>柱形图-就业行业</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line2">
+          <h2>折线图-播放量</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie2">
+          <h2>饼形图-地区分布</h2>
+          <div class="chart">图表</div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </section>
+    <script src="js/flexible.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <!-- 先引入jquery -->
+    <script src="js/jquery.js"></script>
+    <!-- 必须先引入china.js 这个文件 因为中国地图需要 -->
+    <script src="js/china.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
